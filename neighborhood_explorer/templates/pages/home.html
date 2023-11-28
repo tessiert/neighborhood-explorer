@@ -1,0 +1,22 @@
+{% extends "home_and_search.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block lower_title %}
+    <h1 class="city_search_header">Top Five Cities Searched</h1>
+    <hr class="city_search_hr"/>
+{% endblock lower_title %}
+
+{% block lower_content %}
+    <div class="city_search_div">
+        <ol class="city_search_list">
+            {% for cur_search in top_searches %}
+                <li>
+                    <a href="search/{{ cur_search.city }},{{ cur_search.state }}/">
+                    {{ cur_search.city }}, {{ cur_search.state }}</a>
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
+{% endblock lower_content %}

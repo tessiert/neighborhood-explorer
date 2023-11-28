@@ -1,0 +1,164 @@
+/*  Debugging */
+.alert-debug {
+  color: black;
+  background-color: white;
+  border-color: #d6e9c6;
+}
+
+.alert-error {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+
+
+/* Global */
+hr {
+  height: 1px;
+  border: none;
+  color: #333;
+  background-color: #333; 
+}
+
+/*  base.html */
+body {
+  background-color: antiquewhite;  
+}
+
+
+/* Navigation Bar */
+.navbar {
+    background-color: burlywood;
+}
+
+/* home_and_search.html */
+.buttonHolder {
+  text-align: center;
+}
+
+.address_search_form {
+  padding: 2em 0 0 0;
+}
+
+
+
+/* home.html */
+.city_search_header { 
+  display: block;
+  font-size: 2em;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 1em 0 0 0;
+}
+
+.city_search_div {
+  text-align: center;
+}
+
+.city_search_list {
+  display: inline-block; 
+  text-align: left;
+  font-size: 24px;
+}
+
+
+
+/* search.html */
+#lower_title {
+  font-family: 'Dancing Script';
+  padding: 1em 0 0 0;
+}
+
+#current_conditions {
+  text-align: center;
+  margin: 40px 0 40px 0;
+}
+
+#weather_border {
+width: 140px;
+height: 225px;
+padding: 1em 0 0 20px;
+border: 2px solid darkgreen;
+border-radius: 20px;
+}
+
+#day_date {
+    padding: 0 0 0 15px;
+}
+
+#low {
+    color: blue;
+    float: left;
+}
+#high {
+    color: red;
+    float: left;
+}
+
+#day_div {
+  padding:0 25px 25px 0;
+}
+
+#float_div {
+  float: left;
+}
+
+#poi_title {
+  text-align: center;
+  margin: 40px 0 40px 0;
+}
+
+#search_results_div {
+  vertical-align: top;
+  width: 200px;
+}
+
+.search_criteria {
+  width: 200px;
+}
+
+#radius_div {
+  text-align: right;
+  padding: 10px 0 0 0;
+}
+
+#sort_method_div {
+  text-align: right;
+  padding: 10px 0 0 0;
+}
+
+#declutter_div {
+  text-align: center;
+  padding: 10px 0 25px 0;
+}
+
+#address_info_div {
+  text-align: center;
+  padding-bottom: 25px;
+}
+
+#poi_map {
+  width: 480px;
+  height: 425px;
+  padding-bottom: 25px;
+}
+
+#poi_info_div {
+  padding-bottom: 25px;
+}
+
+#poi_textbox_div {
+  width: 200px;
+  height: 400px;
+  border: 1px solid black;
+  padding: 5px;
+  overflow-y: scroll;
+  font-family: arial;
+  font-size:18px;
+}
+
+.poi_link {
+  color: darkblue;
+}

@@ -1,0 +1,162 @@
+{% extends "home_and_search.html" %}
+
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block lower_title %}
+    <h1 id="lower_title">{{ formatted_address }}</h1>
+    <hr/>
+{% endblock lower_title %}
+
+{% block lower_content %}
+    <p>
+        <h4 id="current_conditions">Current Conditions: 
+            {{ temperature }}&#8457, {{ summary }}
+        </h4>
+    </p>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md"></div>
+            {% for day in days %}
+                <div class="col-md-3 d-flex justify-content-center" id="day_div">
+                    <div id="weather_border">
+                        <div id="day_date">
+                            {{ day.name }}<br>{{ day.date }}
+                        </div>
+                        <p><img src="{{ day.image }}" alt="{{ day.text }}"></p>
+                        <p>
+                            <h3>
+                                <div id="low">{{ day.low }}&deg</div>
+                                <div id="float_div">/</div>
+                                <div id="high">{{ day.high }}&deg</div>
+                            </h3>
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="col-md"></div>
+        </div>
+    </div>
+
+    <p>
+        <h1 id="poi_title">Points of Interest</h1>
+    </p>
+
+    <a name="poi_anchor"></a>
+    <div class="row no-gutters" id="poi_section">
+        <div class="col-lg-3 d-flex justify-content-center">
+            <form id="poi_form" action="">
+                {% csrf_token %}
+                <div id="search_results_div">
+                    <select id="point_of_interest" name="point_of_interest" 
+                    class="poi_menu search_criteria" required>
+                        <option 
+                            value="" selected disabled hidden>Point of Interest
+                        </option>
+                        <!-- Return query string for place search -->
+                        <option value="aquarium zoo">Aquariums/Zoos</option>
+                        <option value="campground">Campgrounds</option>
+                        <option value="cinema">Movie Theaters</option>
+                        <option value="museum">Museums</option>
+                        <option value="performing arts">Performing Arts</option>
+                        <option value="nature park">Parks/Nature Preserves</option>
+                        <option value="amusement">Recreation</option>
+                        <option value="cafe">Restaurants/Cafés</option>
+                        <option value="school">Schools</option>
+                    </select>
+                    <script>
+                        setSelectedIndex(
+                            document.getElementById('point_of_interest'), 
+                            '{{ poi_start_val }}'
+                        );
+                    </script>
+                    <div id="radius_div">
+                        <select id="radius" name="radius" 
+                        class="poi_menu search_criteria" required>
+                            <option 
+                                value="" selected disabled hidden>Search Distance
+                            </option>
+                            <!-- Return mileage in meters -->
+                            <option value="3219">2 miles/3 km</option>
+                            <option value="8047">5 miles/8 km</option>
+                            <option value="16093">10 miles/16 km</option>
+                            <option value="40234">25 miles/40 km</option>
+                        </select>
+                        <script>
+                            setSelectedIndex(
+                                document.getElementById('radius'), 
+                                '{{ radius_start_val }}'
+                            );
+                        </script>
+                    </div>
+                    <div id="sort_method_div">
+                        <select id="sort_method" name="sort_method" 
+                        class="poi_menu search_criteria" required>
+                            <option 
+                                value="" selected disabled hidden>Sort Method
+                            </option>
+                            <option value="relevance">Relevance</option>
+                            <option value="distance">Distance</option>
+                        </select>
+                        <script>
+                            setSelectedIndex(
+                                document.getElementById('sort_method'), 
+                                '{{ sort_start_val }}'
+                            );
+                        </script>
+                    </div>
+                    <div id="declutter_div">
+                        <!-- if checked, a value will be returned. If unchecked
+                            nothing is returned. -->
+                        <label for="declutter">
+                            <input type="checkbox" id="declutter" name="declutter">
+                            Declutter Map Markers <br>
+                        </label>
+                        <script>
+                            document.getElementById('declutter').checked = {{ declutter_start_val }}
+                        </script>
+                    </div>
+                    <div id="address_info_div">
+                        <!-- Pass all address data back to view to avoid
+                            retreiving it again -->
+                        <input type="hidden" name="address" value="{{ formatted_address }}">
+                        <input type="hidden" name="latitude" value="{{ latitude }}">
+                        <input type="hidden" name="longitude" value="{{ longitude }}">
+                        <input type="hidden" name="temperature" value="{{ temperature }}">
+                        <input type="hidden" name="summary" value="{{ summary }}">
+                        <input name="poi_search" id="poi_submit" type="button" 
+                        hx-post="/update/" hx-target="#poi_section" disabled="disabled" 
+                        value="Submit">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-6 d-flex justify-content-center">
+            <img src={{ map_url }} alt="Map showing points of interest" id="poi_map">
+        </div>
+        <div class="col-lg d-flex justify-content-center" id="poi_info_div">
+            <div id="poi_textbox_div">
+                {% for cur_poi in poi_info %}
+                    {% if cur_poi.link != '' %}
+                        <p>
+                            {{ forloop.counter }}. 
+                            <a
+                                class="poi_link" 
+                                target="_blank" 
+                                href="https://www.google.com/maps/search/?api=1&query={{ cur_poi.link }}"
+                            >
+                                {{ cur_poi.description }}
+                            </a>
+                        </p>
+                    {% else %}
+                        <p>
+                            {{ cur_poi.description }}
+                        </p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock lower_content %}
