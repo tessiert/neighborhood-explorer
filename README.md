@@ -4,7 +4,7 @@
 
 https://github.com/tessiert/neighborhood-explorer/assets/39570561/3c97ade0-ba05-4ed7-80b6-1279a9f35847
 
-https://neighborhood-explorer.com
+# https://neighborhood-explorer.com
 
 This site uses Python, Django, and a PostgreSQL database to integrate data from five different APIs, and also exposes its own API endpoint to provide access to the city/state search data that it tracks. It enables a user to enter some or all of a U.S. address, and then retrieves and displays information about the given location - a three-day weather forecast and a map and drop-down selection mechanism for the exploration of attractions and other points of interest in the area.
 
